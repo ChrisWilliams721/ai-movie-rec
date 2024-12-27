@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Login() {
+export default function Register() {
   return (
     <div className="flex h-screen">
       {/* Left Comic Image Section */}
@@ -17,7 +17,7 @@ export default function Login() {
             className="mx-auto h-20 w-auto"
           />
           <h2 className="mt-10 text-center text-2xl font-bold tracking-tight text-white">
-            Nice to see you again!
+            Sign up here!
           </h2>
         </div>
 
@@ -36,28 +36,31 @@ export default function Login() {
                 />
               </div>
             </div>
-
+            <div>
+              <div className="mt-2">
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  autoComplete="email"
+                  placeholder="Enter password"
+                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
+                />
+              </div>
+            </div>
             <div>
               <div className="flex items-center justify-between"></div>
-              <div className="mt-2">
+              <div>
                 <input
                   id="password"
                   name="password"
                   type="password"
                   required
-                  placeholder="Enter password"
+                  placeholder="Confirm password"
                   autoComplete="current-password"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
                 />
-              </div>
-              <br />
-              <div className="flex text-sm justify-end ">
-                <a
-                  href="#"
-                  className="font-regular text-gray-200 hover:text-indigo-500"
-                >
-                  Forgot password?
-                </a>
               </div>
             </div>
 
@@ -66,18 +69,18 @@ export default function Login() {
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Sign in
+                Register
               </button>
             </div>
           </form>
 
           <p className="mt-10 text-center text-sm text-gray-200">
-            Not a member?{" "}
+            Already a member?{" "}
             <a
               href="#"
               className="font-semibold text-white hover:text-indigo-500"
             >
-              Register
+              Sign in
             </a>
           </p>
         </div>
