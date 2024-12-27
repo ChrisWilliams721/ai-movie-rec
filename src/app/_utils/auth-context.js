@@ -17,19 +17,25 @@ export function AuthProvider({ children }) {
 
         return () => unsubscribe();
     }, [user]);
+
+    const signIn = () => {
+        const provider = new GoogleAuthProvider();
+        signInWithPopup(auth, provider);
+    }
+    const signOut = () => {
+        signOut(auth);
+    }
+    
+    return (
+        <AuthContext.Provider value={{ user, signIn, signOut }}>
+            {children}
+        </AuthContext.Provider>
+    )
 }
 
-const signIn = () => {
-    const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider);
+export const useUserAuth = () => {
+    return useContext(AuthContext);
 }
 
-const signOut = () => {
-    signOut(auth);
-}
 
-return (
-    <AuthContext.Provider value={{ user, signIn, signOut }}>
-        {children}
-    </AuthContext.Provider>
-)
+

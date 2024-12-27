@@ -1,6 +1,28 @@
+
 import React from "react";
+import { useUserAuth } from "../_utils/auth-context";
+import { useRouter } from "next/navigation";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { auth } from "../_utils/firebase";
 
 export default function Login() {
+  const router = useRouter();
+  const {user, signIn, signOut} = useUserAuth();
+
+  const handleLogin = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      await signInWithPopup(auth, provider);
+      router.push("/profile"); // Redirect after login
+    } catch (error) {
+      console.error("Login failed:", error.message);
+    }
+  };
+
+  const register = () => {
+    router.push("/register");
+  }
+
   return (
     <div className="flex h-screen">
       {/* Left Comic Image Section */}
@@ -76,6 +98,7 @@ export default function Login() {
               <p className="text-center text-sm text-gray-200 mb-2" >Or</p>
               <div>
                 <button
+                  onClick={handleLogin}
                   type="submit"
                   className="flex w-full justify-center rounded-md bg-gray-700 px-3 py-1.5 text-sm font-regular text-white shadow-sm hover:bg-gray-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
@@ -88,6 +111,7 @@ export default function Login() {
           <p className="mt-10 text-center text-sm text-gray-200">
             Not a member?{" "}
             <a
+              onClick={register}
               href="#"
               className="font-semibold text-white hover:text-indigo-500"
             >

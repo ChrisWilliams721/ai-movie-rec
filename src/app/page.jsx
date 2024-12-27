@@ -1,6 +1,6 @@
 "use client";
 import Login from "./components/login";
-import Register from "./components/register";
+import Register from "./register/page";
 
 export default function Root() {
   return (

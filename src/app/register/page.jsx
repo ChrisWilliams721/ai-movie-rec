@@ -1,6 +1,15 @@
+"use client";
 import React from "react";
+import { useUserAuth } from "../_utils/auth-context";
+import { useRouter } from "next/navigation";
 
 export default function Register() {
+  const router = useRouter();
+  const { user, signIn, signOut } = useUserAuth();
+  
+  const login = () => {
+    router.push("/");
+  }
   return (
     <div className="flex h-screen">
       {/* Left Comic Image Section */}
@@ -77,6 +86,7 @@ export default function Register() {
           <p className="mt-10 text-center text-sm text-gray-200">
             Already a member?{" "}
             <a
+              onClick={login}
               href="#"
               className="font-semibold text-white hover:text-indigo-500"
             >
