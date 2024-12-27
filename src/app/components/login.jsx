@@ -4,7 +4,10 @@ export default function Login() {
   return (
     <div className="flex h-screen">
       {/* Left Comic Image Section */}
-      <div className="hidden lg:flex lg:w-2/3 bg-cover bg-center rounded-r-[140px] overflow-hidden" style={{ backgroundImage: 'url("/pxfuel.png")' }}>
+      <div
+        className="hidden lg:flex lg:w-2/3 bg-cover bg-center rounded-r-[140px] overflow-hidden"
+        style={{ backgroundImage: 'url("/pxfuel.png")' }}
+      >
         {/* Ensure the image fills this section */}
       </div>
 
@@ -68,6 +71,17 @@ export default function Login() {
               >
                 Sign in
               </button>
+            </div>
+            <div>
+              <p className="text-center text-sm text-gray-200 mb-2" >Or</p>
+              <div>
+                <button
+                  type="submit"
+                  className="flex w-full justify-center rounded-md bg-gray-700 px-3 py-1.5 text-sm font-regular text-white shadow-sm hover:bg-gray-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                  <img src="/google.png" alt="Google" className="w-6 h-6 mr-2" />Sign in with Google
+                </button>
+              </div>
             </div>
           </form>
 

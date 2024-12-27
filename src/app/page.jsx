@@ -5,7 +5,7 @@ import Register from "./components/register";
 export default function Root() {
   return (
     <div>
-      <Register/>
+      <Login/>
     </div>
       
   )
