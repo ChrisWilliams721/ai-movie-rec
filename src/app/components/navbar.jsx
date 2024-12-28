@@ -7,6 +7,7 @@ import { useState } from "react";
 
 export default function Nav() {
   const [user, setUser] = useState(null);
+  const [selectedLink, setSelectedLink] = useState(null);
   const router = useRouter();
 
   const signOut = async () => {
@@ -59,8 +60,7 @@ export default function Nav() {
           <li className="px-3">
             <a
               onClick={handlebrowse}
-              href="#"
-              className="font-medium text-lg text-gray-900 hover:font-semibold"
+              className="font-medium text-lg text-gray-900 hover:font-semibold cursor-pointer"
             >
               Browse
             </a>
@@ -68,8 +68,7 @@ export default function Nav() {
           <li className="px-3">
             <a
                 onClick={handleactivity}
-              href="#"
-              className="font-medium text-lg text-gray-900 hover:font-semibold"
+              className="font-medium text-lg text-gray-900 hover:font-semibold cursor-pointer"
             >
               Activity
             </a>
@@ -77,8 +76,7 @@ export default function Nav() {
           <li className="px-3">
             <a
                 onClick={handlereadlist}
-              href="#"
-              className="font-medium text-lg text-gray-900 hover:font-semibold"
+              className="font-medium text-lg text-gray-900 hover:font-semibold cursor-pointer"
             >
               ReadList
             </a>
@@ -86,8 +84,7 @@ export default function Nav() {
           <li className="px-3">
             <a
                 onClick={handleblog}
-              href="#"
-              className="font-medium text-lg text-gray-900 hover:font-semibold"
+              className="font-medium text-lg text-gray-900 hover:font-semibold cursor-pointer"
             >
               Blog
             </a>
@@ -119,16 +116,14 @@ export default function Nav() {
                 <MenuItem>
                   <a
                   onClick={handleprofile}
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
                   >
                     Your Profile
                   </a>
                 </MenuItem>
                 <MenuItem>
                   <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
                   >
                     Settings
                   </a>
@@ -136,8 +131,7 @@ export default function Nav() {
                 <MenuItem>
                   <a
                     onClick={signOut}
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
                   >
                     Sign out
                   </a>

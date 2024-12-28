@@ -5,7 +5,9 @@ export default function Browse() {
   return (
     <div>
         <Nav/>
-        <div>Browse</div>
+        <div>
+            Browse
+        </div>
     </div>
   )
 }
