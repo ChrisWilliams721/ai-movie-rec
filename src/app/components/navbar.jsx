@@ -1,7 +1,54 @@
+"use client";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
+import { useRouter } from "next/navigation";
 import React from "react";
+import { useState } from "react";
+
 
 export default function Nav() {
+  const [user, setUser] = useState(null);
+  const router = useRouter();
+
+  const signOut = async () => {
+    try { router.push("/"); }
+    catch (error) { console.error(error); }
+    };
+
+  const handlebrowse = async () => {
+    try {
+      router.push("/browse");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const handleactivity = async () => {
+    try {
+      router.push("/activity");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+    const handlereadlist = async () => {
+        try {
+        router.push("/readlist");
+        } catch (error) {
+        console.error(error);
+        }
+    };
+    const handleblog = async () => {
+        try {
+        router.push("/blog");
+        } catch (error) {
+        console.error(error);
+        }
+    };
+    const handleprofile = async () => {
+        try {
+        router.push("/profile");
+        } catch (error) {
+        console.error(error);
+        }
+    };
   return (
     <div className="flex bg-gray-300 rounded-full mt-7 mx-auto w-11/12 h-20 items-center">
       <div className="flex pl-8">
@@ -11,6 +58,7 @@ export default function Nav() {
         <ul className="flex space-x-8 ml-20 items-center">
           <li className="px-3">
             <a
+              onClick={handlebrowse}
               href="#"
               className="font-medium text-lg text-gray-900 hover:font-semibold"
             >
@@ -19,6 +67,7 @@ export default function Nav() {
           </li>
           <li className="px-3">
             <a
+                onClick={handleactivity}
               href="#"
               className="font-medium text-lg text-gray-900 hover:font-semibold"
             >
@@ -27,6 +76,7 @@ export default function Nav() {
           </li>
           <li className="px-3">
             <a
+                onClick={handlereadlist}
               href="#"
               className="font-medium text-lg text-gray-900 hover:font-semibold"
             >
@@ -35,6 +85,7 @@ export default function Nav() {
           </li>
           <li className="px-3">
             <a
+                onClick={handleblog}
               href="#"
               className="font-medium text-lg text-gray-900 hover:font-semibold"
             >
@@ -67,6 +118,7 @@ export default function Nav() {
               >
                 <MenuItem>
                   <a
+                  onClick={handleprofile}
                     href="#"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
@@ -83,6 +135,7 @@ export default function Nav() {
                 </MenuItem>
                 <MenuItem>
                   <a
+                    onClick={signOut}
                     href="#"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >

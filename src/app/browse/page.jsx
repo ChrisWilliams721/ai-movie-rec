@@ -1,11 +1,11 @@
 import React from 'react'
 import Nav from '../components/navbar'
 
-export default function Profile() {
+export default function Browse() {
   return (
     <div>
-      <Nav/>
-      <div>Profile</div>
+        <Nav/>
+        <div>Browse</div>
     </div>
   )
 }
