@@ -30,7 +30,7 @@ export default function MarvelComics() {
         ts: ts,
         apikey: publicKey,
         hash: hash,
-        limit: 5,
+        limit: 8,
         dateRange: `${formatDate(lastWeek)},${formatDate(today)}`,
       });
       try {
@@ -55,21 +55,26 @@ export default function MarvelComics() {
   if (loading) return <p>Loading comics...</p>;
   if (error) return <p>{error}</p>;
   return (
-    <div class="flex-1 mx-auto w-11/12 h-20 items-center mr-7 mt-10">
-      <h1 className="text-xl">Top 5 Marvel Comics this week </h1>
-      <ul className="space-y-4 flex flex-wrap">
+    <div className="flex flex-col mx-auto w-11/12 mt-10">
+      <h1 className="text-xl mb-4 text-white font-bold ml-5">New Marvel Comics This Week</h1>
+      <div className="flex  space-x-4 p-4 rounded-lg">
         {comics.map((comic) => (
-          <li key={comic.id} className="border-b py-2 ">
+          <div
+            key={comic.id}
+            className="min-w-[200px] max-w-[200px] rounded shadow-md"
+          >
             {comic.thumbnail && (
               <img
                 src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
                 alt={comic.title}
-                className="w-full h-48"
+                className="w-full h-auto rounded"
               />
             )}
-          </li>
+            <p className="text-center text-sm mt-2 font-semibold">{comic.title}</p>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
+  
 }
