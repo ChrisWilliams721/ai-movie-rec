@@ -13,7 +13,7 @@ export default function Login() {
     const provider = new GoogleAuthProvider();
     try {
       await signInWithPopup(auth, provider);
-      router.push("/profile"); // Redirect after login
+      router.push("/browse");
     } catch (error) {
       console.error("Login failed:", error.message);
     }

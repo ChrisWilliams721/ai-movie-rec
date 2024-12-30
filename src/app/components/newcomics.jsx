@@ -37,37 +37,42 @@ export default function MarvelComics() {
       const endpoints = [
         {
           name: "new",
-          url: `https://gateway.marvel.com/v1/public/comics?${new URLSearchParams({
-            ...baseParams,
-            dateRange: `${formatDate(lastWeek)},${formatDate(today)}`,
-          })}`,
+          url: `https://gateway.marvel.com/v1/public/comics?${new URLSearchParams(
+            {
+              ...baseParams,
+              dateRange: `${formatDate(lastWeek)},${formatDate(today)}`,
+            }
+          )}`,
         },
         {
           name: "popular",
-          url: `https://gateway.marvel.com/v1/public/comics?${new URLSearchParams({
-            ...baseParams,
-            orderBy: "modified", // Use "modified" to simulate popularity
-          })}`,
+          url: `https://gateway.marvel.com/v1/public/comics?${new URLSearchParams(
+            {
+              ...baseParams,
+              orderBy: "modified", // Use "modified" to simulate popularity
+            }
+          )}`,
         },
         {
           name: "events",
-          url: `https://gateway.marvel.com/v1/public/events?${new URLSearchParams({
-            ...baseParams,
-            orderBy: "modified", // Use "modified" to simulate popularity
-          })}`,
-        }
+          url: `https://gateway.marvel.com/v1/public/events?${new URLSearchParams(
+            {
+              ...baseParams,
+              orderBy: "modified", // Use "modified" to simulate popularity
+            }
+          )}`,
+        },
       ];
 
       try {
         const results = await Promise.all(
-          endpoints.map((endpoint) =>
-            fetch(endpoint.url).then((response) => {
-              if (!response.ok) {
-                throw new Error(`Failed to fetch ${endpoint.name} comics`);
-              }
-              return response.json();
-            })
-          )
+          endpoints.map(async (endpoint) => {
+            const response = await fetch(endpoint.url);
+            if (!response.ok) {
+              throw new Error(`Failed to fetch ${endpoint.name} comics`);
+            }
+            return response.json();
+          })
         );
 
         setNewComics(results[0].data.results || []);
@@ -83,7 +88,8 @@ export default function MarvelComics() {
     fetchMarvelComics();
   }, []);
 
-  if (loading) return <p>Loading comics...</p>;
+  if (loading)
+    return <p className="text-white text-center mt-9">Loading comics...</p>;
   if (error) return <p>Error: {error}</p>;
 
   return (
@@ -136,7 +142,7 @@ export default function MarvelComics() {
         ))}
       </div>
 
-      {/*Popular Events */} 
+      {/*Popular Events */}
       <h1 className="text-xl mt-10 mb-4 text-white font-bold ml-5">
         Popular Events This Week
       </h1>

@@ -7,7 +7,8 @@ import { useState } from "react";
 
 export default function Nav() {
   const [user, setUser] = useState(null);
-  const [selectedLink, setSelectedLink] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [query, setQuery] = useState("");
   const router = useRouter();
 
   const signOut = async () => {
@@ -50,6 +51,15 @@ export default function Nav() {
         console.error(error);
         }
     };
+    const handleSearchChange =  (e) => {
+        setQuery(e.target.value);
+    };
+    const handleSearchSubmit = async (e) => {
+        e.preventDefault();
+        if (query.trim() !== "") {
+            return;
+        }
+    }
   return (
     <div className="flex bg-gray-300 rounded-full mt-7 mx-auto w-11/12 h-20 items-center">
       <div className="flex pl-8">
