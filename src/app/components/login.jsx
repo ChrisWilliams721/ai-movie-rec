@@ -27,7 +27,7 @@ export default function Login() {
     <div className="flex h-screen">
       {/* Left Comic Image Section */}
       <div
-        className="hidden lg:flex lg:w-2/3 bg-cover bg-center rounded-r-[140px] overflow-hidden"
+        className="hidden lg:flex lg:w-2/3 bg-cover bg-center  rounded-r-[140px] overflow-hidden"
         style={{ backgroundImage: 'url("/pxfuel.png")' }}
       >
         {/* Ensure the image fills this section */}
