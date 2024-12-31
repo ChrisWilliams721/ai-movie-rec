@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import md5 from "md5";
+import Link from "next/link";
 
 export default function MarvelComics() {
   const [newComics, setNewComics] = useState([]);
@@ -100,7 +101,8 @@ export default function MarvelComics() {
       </h1>
       <div className="flex space-x-4 p-4 rounded-lg">
         {newComics.map((comic) => (
-          <div
+          <Link
+            href={`/info/${comic.id}`}
             key={comic.id}
             className="min-w-[200px] max-w-[200px] rounded shadow-md bg-gray-800 text-white hover:shadow-lg transform hover:scale-105 transition"
           >
@@ -114,7 +116,7 @@ export default function MarvelComics() {
             <p className="text-center text-sm mt-2 font-semibold px-2">
               {comic.title}
             </p>
-          </div>
+          </Link>
         ))}
       </div>
 
@@ -124,7 +126,8 @@ export default function MarvelComics() {
       </h1>
       <div className="flex space-x-4 p-4 rounded-lg">
         {popularComics.map((comic) => (
-          <div
+          <Link
+            href={`/info/${comic.id}`}
             key={comic.id}
             className="min-w-[200px] max-w-[200px] rounded shadow-md bg-gray-800 text-white hover:shadow-lg transform hover:scale-105 transition"
           >
@@ -138,7 +141,7 @@ export default function MarvelComics() {
             <p className="text-center text-sm mt-2 font-semibold px-2">
               {comic.title}
             </p>
-          </div>
+          </Link>
         ))}
       </div>
 
@@ -148,7 +151,8 @@ export default function MarvelComics() {
       </h1>
       <div className="flex space-x-4 p-4 rounded-lg">
         {popularEvents.map((comic) => (
-          <div
+          <Link
+            href={`/info/${comic.id}`}
             key={comic.id}
             className="min-w-[200px] max-w-[200px] rounded shadow-md bg-gray-800 text-white hover:shadow-lg transform hover:scale-105 transition"
           >
@@ -162,7 +166,7 @@ export default function MarvelComics() {
             <p className="text-center text-sm mt-2 font-semibold px-2">
               {comic.title}
             </p>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
