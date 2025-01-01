@@ -1,14 +1,16 @@
 "use client";
 import React, { useEffect, useState } from "react";
-
 import md5 from "md5";
 import { useParams, useRouter } from "next/navigation";
+import { saveComic } from "../../_services/posts-services";
+import { useUserAuth } from "../../_utils/auth-context";
 
 export default function Info() {
   const { comicId } = useParams();
   const [comic, setComic] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { user } = useUserAuth();
 
   const router = useRouter();
 
@@ -48,6 +50,17 @@ export default function Info() {
   const handleClick = () => {
     router.push("/blog");
   };
+
+  const handleAddToReadlist = async (event) => {
+      event.preventDefault();
+  
+      try {
+        await saveComic(comicId, user.uid);
+        console.log("Comic added to readlist successfully!");
+      } catch (error) {
+        console.error("Error adding comic to readlist: ", error);
+      }
+    };
   
 
   if (loading) return <p>Loading comic details...</p>;
@@ -84,7 +97,7 @@ export default function Info() {
       </div>
       <div className="flex  justify-start space-x-4 mt-4 align-middle">
       <img src="../../like.png"  className="w-8 h-8 b cursor-pointer "/>
-          <img src="../../bookmark-white.png"  className="w-6 h-6 b cursor-pointer mt-1" onClick={savecomic}/>
+          <img src="../../bookmark-white.png"  className="w-6 h-6 b cursor-pointer mt-1" onClick={handleAddToReadlist}/>
           <img src="../../blog.png"  className="w-7 h-7 b cursor-pointer" onClick={handleClick}/>
         </div>
     </div>

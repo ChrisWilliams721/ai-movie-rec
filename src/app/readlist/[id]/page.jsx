@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { useUserAuth } from '../../_utils/auth-context';
 
+
 export default function Readlist() {
   const [posts, setPosts] = useState([]);
   const {user} = useUserAuth();
@@ -40,7 +41,9 @@ export default function Readlist() {
     };
     fetchPosts();
   }, [user]);
-    
+
+  
+
   return (
     <div>
         <Nav/>
