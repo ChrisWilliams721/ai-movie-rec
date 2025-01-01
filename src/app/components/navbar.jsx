@@ -6,7 +6,7 @@ import { useState } from "react";
 
 
 export default function Nav() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState([]);
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState("");
   const router = useRouter();
@@ -32,7 +32,7 @@ export default function Nav() {
   };
     const handlereadlist = async () => {
         try {
-        router.push("/readlist");
+        router.push(`/readlist/${user.uid}`);
         } catch (error) {
         console.error(error);
         }

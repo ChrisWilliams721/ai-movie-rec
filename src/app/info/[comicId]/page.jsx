@@ -48,6 +48,7 @@ export default function Info() {
   const handleClick = () => {
     router.push("/blog");
   };
+  
 
   if (loading) return <p>Loading comic details...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -83,7 +84,7 @@ export default function Info() {
       </div>
       <div className="flex  justify-start space-x-4 mt-4 align-middle">
       <img src="../../like.png"  className="w-8 h-8 b cursor-pointer "/>
-          <img src="../../bookmark-white.png"  className="w-6 h-6 b cursor-pointer mt-1"/>
+          <img src="../../bookmark-white.png"  className="w-6 h-6 b cursor-pointer mt-1" onClick={savecomic}/>
           <img src="../../blog.png"  className="w-7 h-7 b cursor-pointer" onClick={handleClick}/>
         </div>
     </div>
