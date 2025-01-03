@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import md5 from "md5";
 import Link from "next/link";
+import { useUserAuth } from "../_utils/auth-context";
 
 export default function MarvelComics() {
   const [newComics, setNewComics] = useState([]);
@@ -9,6 +10,8 @@ export default function MarvelComics() {
   const [popularEvents, setPopularEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const { user } = useUserAuth();
 
   useEffect(() => {
     const fetchMarvelComics = async () => {

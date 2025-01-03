@@ -1,18 +1,23 @@
 
-import React from "react";
+import React, { use } from "react";
 import { useUserAuth } from "../_utils/auth-context";
 import { useRouter } from "next/navigation";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../_utils/firebase";
+import { addUser } from "../_services/posts-services";
 
 export default function Login() {
   const router = useRouter();
   const {user, signIn, signOut} = useUserAuth();
 
+  
+
   const handleLogin = async () => {
     const provider = new GoogleAuthProvider();
     try {
-      await signInWithPopup(auth, provider);
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      await addUser(user);
       router.push("/browse");
     } catch (error) {
       console.error("Login failed:", error.message);

@@ -1,39 +1,68 @@
-import React from 'react'
-import { collection, addDoc, getDocs,updateDoc, doc, deleteDoc } from 'firebase/firestore';
-import { db } from '../_utils/firebase';
+import React from "react";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  updateDoc,
+  doc,
+  deleteDoc,
+  setDoc,
+  arrayUnion,
+} from "firebase/firestore";
+import { db } from "../_utils/firebase";
 
-export const addPost = async (review, stars, userId) => {
+{/* CRUD FOR USERS */}
+export const addUser = async (user) => {
     try {
-        const docRef = await addDoc(collection(db, "posts"), {
-            userId: userId,
-            review: review,
-            stars: stars,
-        });
-        console.log("Document written with ID: ", docRef.id);
+      const userRef = doc(db, "users", user.uid);
+      await setDoc(userRef, {
+        uid: user.uid,
+        email: user.email,
+        displayName: user.displayName,
+        photoURL: user.photoURL,
+        readlist: [],
+      }, { merge: true });
+      console.log("User added to database successfully!");
     } catch (e) {
-        console.error("Error adding document: ", e);
+      console.error("Error adding user to database: ", e);
     }
+  };
+
+
+{/* CRUD FOR POSTS */}
+export const addPost = async (review, stars, userId) => {
+  try {
+    const docRef = await addDoc(collection(db, "posts"), {
+      userId: userId,
+      review: review,
+      stars: stars,
+    });
+    console.log("Document written with ID: ", docRef.id);
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
 };
 
 export const getPosts = async () => {
-    try {
-        const querySnapshot = await getDocs(collection(db, "posts"));
-        querySnapshot.forEach((doc) => {
-            posts.push({ id: doc.id, ...doc.data() });
-        });
-        return posts;
-    } catch (e) {
-        console.error("Error getting documents: ", e);
-        }
+  try {
+    const querySnapshot = await getDocs(collection(db, "posts"));
+    querySnapshot.forEach((doc) => {
+      posts.push({ id: doc.id, ...doc.data() });
+    });
+    return posts;
+  } catch (e) {
+    console.error("Error getting documents: ", e);
+  }
 };
 
 export const saveComic = async (comicId, userId) => {
-    try {
-        const docRef = doc(db, "users", userId);
-        await updateDoc(docRef, {
-            readlist: [comicId],
-        });
-    } catch (e) {
-        console.error("Error updating document: ", e);
-    }
+  try {
+    const docRef = doc(db, "users", userId);
+    await setDoc(docRef, {
+        readlist: arrayUnion(comicId),
+    }, { merge: true });
+    console.log("Document updated successfully!");
+  } catch (e) {
+    console.error("Error updating document: ", e);
+  }
 };
