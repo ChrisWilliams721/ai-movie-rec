@@ -2,13 +2,14 @@
 import React, { useEffect, useState } from "react";
 import md5 from "md5";
 import { useParams, useRouter } from "next/navigation";
-import { saveComic } from "../../_services/posts-services";
+import { saveComic, addPost } from "../../_services/posts-services";
 import { useUserAuth } from "../../_utils/auth-context";
 import Modal from "../../components/modal";
 
 
 export default function Info() {
   const { comicId } = useParams();
+  const [review, setReview] = useState("");
   const [comic, setComic] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -54,8 +55,13 @@ export default function Info() {
     e.preventDefault();
     setIsModalOpen(true);
   };
-  const handleSaveBlog = (inputValue) => {
-    console.log("Blog content to save: ", inputValue);
+  const handleSaveBlog = async (inputValue) => {
+    try {
+      await addPost(inputValue, 5, user.uid); // Example usage of addPost
+      console.log("Blog content saved:", inputValue);
+    } catch (error) {
+      console.error("Error saving blog content:", error);
+    }
     setIsModalOpen(false);
   };
   const handleAddToReadlist = async (event) => {

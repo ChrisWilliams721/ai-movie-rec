@@ -30,14 +30,14 @@ export const addUser = async (user) => {
 
 
 {/* CRUD FOR POSTS */}
-export const addPost = async (review, stars, userId) => {
+export const addPost = async (review, userId) => {
   try {
-    const docRef = await addDoc(collection(db, "posts"), {
-      userId: userId,
-      review: review,
-      stars: stars,
+    const docRef = doc(db, "users", userId);
+    const postsCollectionRef = collection(docRef, "posts");
+    await addDoc(postsCollectionRef, {
+      review,
     });
-    console.log("Document written with ID: ", docRef.id);
+    console.log("Document added successfully!");
   } catch (e) {
     console.error("Error adding document: ", e);
   }
