@@ -4,6 +4,8 @@ import md5 from "md5";
 import { useParams, useRouter } from "next/navigation";
 import { saveComic } from "../../_services/posts-services";
 import { useUserAuth } from "../../_utils/auth-context";
+import Modal from "../../components/modal";
+
 
 export default function Info() {
   const { comicId } = useParams();
@@ -11,6 +13,7 @@ export default function Info() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { user } = useUserAuth();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const router = useRouter();
 
@@ -47,10 +50,14 @@ export default function Info() {
     fetchComic();
   }, [comicId]);
 
-  const handleClick = () => {
-    router.push("/blog");
+  const handleBlog = (e) => {
+    e.preventDefault();
+    setIsModalOpen(true);
   };
-
+  const handleSaveBlog = (inputValue) => {
+    console.log("Blog content to save: ", inputValue);
+    setIsModalOpen(false);
+  };
   const handleAddToReadlist = async (event) => {
       event.preventDefault();
   
@@ -61,7 +68,6 @@ export default function Info() {
         console.error("Error adding comic to readlist: ", error);
       }
     };
-  
 
   if (loading) return <p>Loading comic details...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -98,7 +104,11 @@ export default function Info() {
       <div className="flex  justify-start space-x-4 mt-4 align-middle">
       <img src="../../like.png"  className="w-8 h-8 b cursor-pointer "/>
           <img src="../../bookmark-white.png"  className="w-6 h-6 b cursor-pointer mt-1" onClick={handleAddToReadlist}/>
-          <img src="../../blog.png"  className="w-7 h-7 b cursor-pointer" onClick={handleClick}/>
+          <img src="../../blog.png"  className="w-7 h-7 b cursor-pointer" onClick={handleBlog}/>
+          <Modal 
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onSave={handleSaveBlog}/>
         </div>
     </div>
   );
