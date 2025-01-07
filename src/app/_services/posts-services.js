@@ -30,6 +30,11 @@ export const addUser = async (user) => {
 
 
 {/* CRUD FOR POSTS */}
+/**
+ * Adds a post to the user's posts subcollection
+ * @param {string} review - The text of the post
+ * @param {string} userId - The ID of the user to add the post to
+ */
 export const addPost = async (review, userId) => {
   try {
     const docRef = doc(db, "users", userId);

@@ -57,7 +57,7 @@ export default function Info() {
   };
   const handleSaveBlog = async (inputValue) => {
     try {
-      await addPost(inputValue, 5, user.uid); // Example usage of addPost
+      await addPost(inputValue, user.uid); // Example usage of addPost
       console.log("Blog content saved:", inputValue);
     } catch (error) {
       console.error("Error saving blog content:", error);
