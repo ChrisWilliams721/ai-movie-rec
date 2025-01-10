@@ -9,7 +9,7 @@ export default function Modal({ isOpen, onClose, onSave }) {
   };
   return (
     <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
-      <div className="bg-white p-4 rounded shadow-lg">
+      <div className="bg-white p-4 rounded shadow-lg ">
         <h2 className="text-xl mb-4">Enter Blog Content</h2>
         <input
           type="text"

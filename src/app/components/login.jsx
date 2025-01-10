@@ -1,5 +1,5 @@
 
-import React, { use } from "react";
+import React, { use, useState } from "react";
 import { useUserAuth } from "../_utils/auth-context";
 import { useRouter } from "next/navigation";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
@@ -7,13 +7,11 @@ import { auth } from "../_utils/firebase";
 import { addUser } from "../_services/posts-services";
 
 export default function Login() {
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-  const {user, signIn, signOut} = useUserAuth();
-
-  
-
   const handleLogin = async () => {
     const provider = new GoogleAuthProvider();
+    setIsLoading(true);
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
@@ -21,6 +19,8 @@ export default function Login() {
       router.push("/browse");
     } catch (error) {
       console.error("Login failed:", error.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -104,6 +104,7 @@ export default function Login() {
               <div>
                 <button
                   onClick={handleLogin}
+                  disabled={isLoading}
                   type="submit"
                   className="flex w-full justify-center rounded-md bg-gray-700 px-3 py-1.5 text-sm font-regular text-white shadow-sm hover:bg-gray-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >

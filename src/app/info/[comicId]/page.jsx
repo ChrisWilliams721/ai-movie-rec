@@ -64,11 +64,10 @@ export default function Info() {
     }
     setIsModalOpen(false);
   };
-  const handleAddToReadlist = async (event) => {
-      event.preventDefault();
-  
+  const handleAddToReadlist = async (e) => {
+      e.preventDefault();
       try {
-        await saveComic(comicId, user.uid);
+        await saveComic(comicId, user.uid); 
         console.log("Comic added to readlist successfully!");
       } catch (error) {
         console.error("Error adding comic to readlist: ", error);

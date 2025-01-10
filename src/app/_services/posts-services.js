@@ -20,7 +20,6 @@ export const addUser = async (user) => {
         email: user.email,
         displayName: user.displayName,
         photoURL: user.photoURL,
-        readlist: [],
       }, { merge: true });
       console.log("User added to database successfully!");
     } catch (e) {
@@ -40,8 +39,8 @@ export const addPost = async (review, userId) => {
     const docRef = doc(db, "users", userId);
     const postsCollectionRef = collection(docRef, "posts");
     await addDoc(postsCollectionRef, {
-      review,
-    });
+      review, 
+    }, { merge: true });
     console.log("Document added successfully!");
   } catch (e) {
     console.error("Error adding document: ", e);
