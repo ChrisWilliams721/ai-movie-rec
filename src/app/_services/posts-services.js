@@ -34,11 +34,12 @@ export const addUser = async (user) => {
  * @param {string} review - The text of the post
  * @param {string} userId - The ID of the user to add the post to
  */
-export const addPost = async (review, userId) => {
+export const addPost = async (title,review, userId) => {
   try {
     const docRef = doc(db, "users", userId);
     const postsCollectionRef = collection(docRef, "posts");
     await addDoc(postsCollectionRef, {
+      title,
       review, 
     }, { merge: true });
     console.log("Document added successfully!");
