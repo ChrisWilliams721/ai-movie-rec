@@ -55,10 +55,10 @@ export default function Info() {
     e.preventDefault();
     setIsModalOpen(true);
   };
-  const handleSaveBlog = async (inputValue) => {
+  const handleSaveBlog = async (title, review) => {
     try {
-      await addPost(inputValue, user.uid); // Example usage of addPost
-      console.log("Blog content saved:", inputValue);
+      await addPost(title, review, user.uid, comicId); // Example usage of addPost
+      console.log("Blog content saved:", title, review, comicId);
     } catch (error) {
       console.error("Error saving blog content:", error);
     }

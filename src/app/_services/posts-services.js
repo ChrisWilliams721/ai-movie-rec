@@ -34,17 +34,22 @@ export const addUser = async (user) => {
  * @param {string} review - The text of the post
  * @param {string} userId - The ID of the user to add the post to
  */
-export const addPost = async (title,review, userId) => {
+export const addPost = async (title, review, userId, comicId) => {
+  if (!title || !review || !userId || !comicId) {
+    console.error("addPost called with missing data:", { title, review, userId, comicId });
+    return;
+  }
   try {
-    const docRef = doc(db, "users", userId);
-    const postsCollectionRef = collection(docRef, "posts");
+    const postsCollectionRef = collection(db, "users", userId, "posts");
     await addDoc(postsCollectionRef, {
       title,
-      review, 
-    }, { merge: true });
-    console.log("Document added successfully!");
+      review,
+      comicId,
+      createdAt: new Date()
+    });
+    console.log("Post added successfully!");
   } catch (e) {
-    console.error("Error adding document: ", e);
+    console.error("Error adding post: ", e);
   }
 };
 

@@ -98,6 +98,30 @@ export default function MarvelComics() {
 
   return (
     <div className="flex flex-col mx-auto w-11/12 mt-10">
+      {/* Popular Reviews Section */}
+      <h1 className="text-xl mb-4 text-white font-bold ml-5">
+        Popular Reviews This Week
+      </h1>
+      <div className="flex space-x-4 p-4 rounded-lg">
+        {newComics.map((comic) => (
+          <Link
+            href={`/info/${comic.id}`}
+            key={comic.id}
+            className="min-w-[200px] max-w-[200px] rounded shadow-md bg-gray-800 text-white hover:shadow-lg transform hover:scale-105 transition"
+          >
+            {comic.thumbnail && (
+              <img
+                src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
+                alt={comic.title}
+                className="w-full h-auto rounded-t"
+              />
+            )}
+            <p className="text-center text-sm mt-2 font-semibold px-2">
+              {comic.title}
+            </p>
+          </Link>
+        ))}
+      </div>
       {/* New Comics Section */}
       <h1 className="text-xl mb-4 text-white font-bold ml-5">
         New Marvel Comics This Week
