@@ -55,10 +55,13 @@ export default function Info() {
     e.preventDefault();
     setIsModalOpen(true);
   };
-  const handleSaveBlog = async (title, review) => {
+  const handleSaveBlog = async (title, review, rating) => {
+    const comicThumbnailUrl = comic?.thumbnail
+      ? `${comic.thumbnail.path}.${comic.thumbnail.extension}`
+      : "";
     try {
-      await addPost(title, review, user.uid, comicId); // Example usage of addPost
-      console.log("Blog content saved:", title, review, comicId);
+      await addPost(title, review, user.uid, comicId, comicThumbnailUrl, rating);
+      console.log("Blog content saved:", title, review, comicId, comicThumbnailUrl, rating);
     } catch (error) {
       console.error("Error saving blog content:", error);
     }

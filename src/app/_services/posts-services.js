@@ -34,19 +34,29 @@ export const addUser = async (user) => {
  * @param {string} review - The text of the post
  * @param {string} userId - The ID of the user to add the post to
  */
-export const addPost = async (title, review, userId, comicId) => {
-  if (!title || !review || !userId || !comicId) {
-    console.error("addPost called with missing data:", { title, review, userId, comicId });
+export const addPost = async (title, review, userId, comicId, comicThumbnailUrl, rating) => {
+  if (!title || !review || !userId || !comicId || !comicThumbnailUrl || rating < 1) {
+    console.error("addPost called with missing data:", { title, review, userId, comicId, comicThumbnailUrl, rating });
     return;
   }
   try {
-    const postsCollectionRef = collection(db, "users", userId, "posts");
-    await addDoc(postsCollectionRef, {
+    const postData = {
       title,
       review,
       comicId,
+      comicThumbnailUrl,
+      rating,
       createdAt: new Date()
-    });
+    };
+    console.log("Saving postData to Firestore:", postData); // <--- Add this line
+    // Add the post to the user's posts subcollection
+    const userPostsCollectionRef = collection(db, "users", userId, "posts");
+    await addDoc(userPostsCollectionRef, postData);
+
+    // Also add the post to a global posts collection
+    const globalPostsCollectionRef = collection(db, "posts");
+    await addDoc(globalPostsCollectionRef, postData);
+
     console.log("Post added successfully!");
   } catch (e) {
     console.error("Error adding post: ", e);

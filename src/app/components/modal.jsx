@@ -6,17 +6,27 @@ export default function Modal({ isOpen, onClose, onSave }) {
   if (!isOpen) return null;
   const [inputValue, setInputValue] = useState("");
   const [textareaValue, setTextareaValue] = useState("");
+  const [rating, setRating] = useState(0);
   const [error, setError] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!inputValue || !textareaValue) {
-      setError("Please fill out all fields");
+    if (!inputValue || !textareaValue || rating === 0) {
+      setError("Please fill out all fields and select a rating");
       return;
     }
     setError("");
-    onSave(inputValue, textareaValue);
+    onSave(inputValue, textareaValue, rating);
   };
+
+  const handleClose = () => {
+    setInputValue("");  
+    setTextareaValue("");
+    setRating(0);
+    setError("");
+    onClose();
+  };
+
   return (
     <form onSubmit={handleSubmit}>
       <div className="space-y-12 bg-gray-800 p-8 rounded-lg">
@@ -57,11 +67,25 @@ export default function Modal({ isOpen, onClose, onSave }) {
                 />
               </div>
             </div>
+            <div className="col-span-full mt-4 flex items-center">
+              <span className="text-white mr-2">Rating:</span>
+              {[1, 2, 3, 4, 5].map((star) => (
+                <button
+                  type="button"
+                  key={star}
+                  onClick={() => setRating(star)}
+                  className="text-2xl focus:outline-none"
+                  aria-label={`Rate ${star} star${star > 1 ? "s" : ""}`}
+                >
+                  {star <= rating ? "★" : "☆"}
+                </button>
+              ))}
+            </div>
           </div>
           <div className="mt-6 flex items-center justify-end gap-x-6">
             <button
               type="button"
-              
+              onClick={handleClose}
               className="rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               Cancel
